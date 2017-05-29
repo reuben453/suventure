@@ -14,6 +14,8 @@ class User < ApplicationRecord
   validate :validate_username
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
+  has_many :messages, inverse_of: :user
+
   attr_accessor :login
 
   def validate_username
