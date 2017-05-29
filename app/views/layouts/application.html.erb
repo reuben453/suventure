@@ -9,8 +9,26 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <% if notice -%>
+      <div class="alert flash-alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%= notice %>
+      </div>
+    <% end -%>
+    <% if alert -%>
+      <div class="alert flash-alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%= alert %>
+      </div>
+    <% end -%>
+    <div class="container-fluid">
+      <div class="masthead">
+        <%= render 'layouts/user_header' %>
+        <h3 class="muted"><%= link_to "Suventure Demo", root_path %></h3>
+        <!-- <h5 class="muted">A demo of using SimpleDB with Devise</h5> -->
+      </div>
+      <hr />
+      <%= yield %>
+    </div>
   </body>
 </html>
