@@ -40,4 +40,20 @@ class UserTest < ActiveSupport::TestCase
     assert_equal(0, user.errors.messages.length)
   end
 
+  test "add message after signup" do
+    user = User.create!(username: "test", email: "some@thing.com", password: "password")
+    assert_equal(1, user.messages.size)
+    assert_equal("You have signed up for this app.", user.messages.first.content)
+    assert_equal(Message::EVENT_SIGNUP, user.messages.first.event)
+  end
+
+  test "add message after email confirmation" do
+    user = User.create!(username: "test", email: "some@thing.com", password: "password")
+    assert_equal(1, user.messages.size)
+    user.confirm
+    assert_equal(2, user.messages.size)
+    assert_equal(Message::EVENT_EMAIL_CONFIRMED, user.messages.last.event)
+    assert_equal("You have confirmed your email #{user.email}", user.messages.last.content)
+  end
+
 end

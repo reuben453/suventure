@@ -16,12 +16,29 @@ class User < ApplicationRecord
 
   has_many :messages, inverse_of: :user
 
+  after_create do |user|
+    user.messages.add_sign_up_message(user: user)
+  end
+
   attr_accessor :login
 
   def validate_username
     if User.where(email: username).exists?
       errors.add(:username, :invalid)
     end
+  end
+
+
+  def after_confirmation
+    self.messages.add_email_confirmation_message(user: self)
+  end
+
+  Warden::Manager.after_authentication do |user,auth,opts|
+    user.messages.add_signin_message(user: user)
+  end
+
+  Warden::Manager.before_logout do |user,auth,opts|
+    user.messages.add_signout_message(user: user)
   end
 
 
