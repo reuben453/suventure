@@ -1,0 +1,24 @@
+.signin-block {
+  position: relative;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%);
+  width: 90vw;
+}
+
+@media only screen and (min-width : 320px) {
+  .signin-block {
+    width: 70vw;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .signin-block {
+    width: 50vw;
+  }
+}
+
+@media only screen and (min-width : 992px) {
+  .signin-block {
+    width: 30vw;
+  }
+}
