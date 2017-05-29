@@ -40,6 +40,22 @@ class UserTest < ActiveSupport::TestCase
     assert_equal(0, user.errors.messages.length)
   end
 
+  test "duplicate usernames" do
+    user = User.create(username: "test", email: "some@thing.com", password: "password")
+    assert_equal(0, user.errors.messages.length)
+    user1 = User.create(username: "test", email: "other@thing.com", password: "password")
+    assert_equal(1, user1.errors.messages.length)
+    assert_equal(["has already been taken"], user1.errors.messages[:username])
+  end
+
+  test "duplicate emails" do
+    user = User.create(username: "test", email: "some@thing.com", password: "password")
+    assert_equal(0, user.errors.messages.length)
+    user1 = User.create(username: "test1", email: "some@thing.com", password: "password")
+    assert_equal(1, user1.errors.messages.length)
+    assert_equal(["has already been taken"], user1.errors.messages[:email])
+  end
+
   test "add message after signup" do
     user = User.create!(username: "test", email: "some@thing.com", password: "password")
     assert_equal(1, user.messages.size)
