@@ -1,2 +1,16 @@
-<h1>Messages#index</h1>
-<p>Find me in app/views/messages/index.html.erb</p>
+<table class="table table-responsive table-hover">
+  <thead>
+    <th>Event</th>
+    <th>Content</th>
+    <th>Date</th>
+  </thead>
+  <tbody>
+    <% @messages.each do |msg| %>
+      <tr>
+        <td><%= msg.event %></td>
+        <td><%= msg.content %></td>
+        <td><%= msg.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
