@@ -23,6 +23,19 @@ class User < ApplicationRecord
 
   attr_accessor :login
 
+  def as_json(options={})
+    super(
+      options.reverse_merge({
+        only: [:username, :email],
+        include: {
+          messages: {
+            only: [:event, :content, :created_at]
+          }
+        }
+      })
+    )
+  end
+
   def validate_username
     if User.where(email: username).exists?
       errors.add(:username, :invalid)
