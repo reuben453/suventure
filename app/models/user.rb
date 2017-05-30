@@ -36,6 +36,10 @@ class User < ApplicationRecord
     )
   end
 
+  def regenerate_token
+    self.authentication_token = Devise.friendly_token
+  end
+
   def validate_username
     if User.where(email: username).exists?
       errors.add(:username, :invalid)

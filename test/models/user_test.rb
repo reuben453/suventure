@@ -72,4 +72,13 @@ class UserTest < ActiveSupport::TestCase
     assert_equal("You have confirmed your email #{user.email}", user.messages.last.content)
   end
 
+  test "regenerate token" do
+    user = User.create!(username: "test", email: "some@thing.com", password: "password")
+    token = user.authentication_token
+    assert_not_empty(token)
+    user.regenerate_token
+    assert_not_empty(user.authentication_token)
+    assert_not_equal(user.authentication_token, token)
+  end
+
 end

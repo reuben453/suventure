@@ -28,7 +28,10 @@
         <!-- <h5 class="muted">A demo of using SimpleDB with Devise</h5> -->
       </div>
       <hr />
-      <%= yield %>
+      <div>
+        <%= render 'layouts/nav' %>
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

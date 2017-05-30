@@ -1,0 +1,17 @@
+<h2 class="heading">Tokens</h2>
+<div>
+  <%= form_tag "/regenerate", :name => "regenrateToken", :class => "form-horizontal" do %>
+    <div class="form-group form-inline">
+      <label for="token" class="col-sm-2 control-label">Your current API Token:</label>
+      <!-- <input type="text" id="token" class="form-control" disabled value="<%= @token %>"></input> -->
+      <p class="form-control-static col-sm-10"><%= @token %></p>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Regenerate token</button>
+        <p class="help-block">This will generate a new token and invalidate the current token.</p>
+      </div>
+    </div>
+  <% end %>
+</div>

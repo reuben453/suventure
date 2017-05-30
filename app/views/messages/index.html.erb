@@ -1,16 +1,19 @@
-<table class="table table-responsive table-hover">
-  <thead>
-    <th>Event</th>
-    <th>Content</th>
-    <th>Date</th>
-  </thead>
-  <tbody>
-    <% @messages.each do |msg| %>
-      <tr>
-        <td><%= msg.event %></td>
-        <td><%= msg.content %></td>
-        <td><%= msg.created_at %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<h2 class="heading">Messages</h2>
+<div role="tabpanel" class="tab-pane active" id="messages">
+  <table class="table table-responsive table-hover">
+    <thead>
+      <th>Event</th>
+      <th>Content</th>
+      <th>Date</th>
+    </thead>
+    <tbody>
+      <% @messages.each do |msg| %>
+        <tr>
+          <td><%= msg.event %></td>
+          <td><%= msg.content %></td>
+          <td><%= msg.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
