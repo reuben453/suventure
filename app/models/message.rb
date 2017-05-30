@@ -6,6 +6,7 @@ class Message < ApplicationRecord
   EVENT_SIGNIN = "login"
   EVENT_SIGNOUT = "logout"
   EVENT_EMAIL_CONFIRMED = "email_confirmed"
+  EVENT_TOKEN_GENERATED = 'token_generated'
 
   def self.add_message(user:, content:, event:)
     self.create!(user: user, content: content, event: event)
@@ -25,6 +26,10 @@ class Message < ApplicationRecord
 
   def self.add_signout_message(user:, content: "You have signed out.")
     self.add_message(user: user, content: content, event: EVENT_SIGNOUT)
+  end
+
+  def self.add_token_regeneration_message(user:, content: "You have generated a new token.")
+    self.add_message(user: user, content: content, event: EVENT_TOKEN_GENERATED)
   end
 
 end
