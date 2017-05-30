@@ -13,6 +13,8 @@ gem "bootstrap-sass", '~> 3.3.6'
 
 gem 'jquery-rails'
 
+gem 'devise_token_auth'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
 # Use postgresql as the database for Active Record

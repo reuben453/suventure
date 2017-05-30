@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include DeviseTokenAuth::Concerns::User
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -17,7 +18,7 @@ class User < ApplicationRecord
   has_many :messages, inverse_of: :user
 
   after_create do |user|
-    user.messages.add_sign_up_message(user: user)
+    user.messages.add_sign_up_message(user: user) if user.present?
   end
 
   attr_accessor :login
@@ -34,11 +35,11 @@ class User < ApplicationRecord
   end
 
   Warden::Manager.after_authentication do |user,auth,opts|
-    user.messages.add_signin_message(user: user)
+    user.messages.add_signin_message(user: user) if user.present?
   end
 
   Warden::Manager.before_logout do |user,auth,opts|
-    user.messages.add_signout_message(user: user)
+    user.messages.add_signout_message(user: user) if user.present?
   end
 
 
